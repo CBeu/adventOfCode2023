@@ -47,6 +47,17 @@ class  cubeConundrum:
         for game in self.games:
             if all(r >= round.get("red", 0) and g >= round.get("green", 0) and b >= round.get("blue", 0) for round in game.rounds):
                 self.validGames.add(game.gameNum)
+
+    def partTwo(self):
+        sum = 0
+        for game in self.games:
+            maxR, maxG, maxB = 0, 0, 0
+            for round in game.rounds:
+                maxR = max(maxR, round.get("red", 0))
+                maxG = max(maxG, round.get("green", 0))
+                maxB = max(maxB, round.get("blue", 0))
+            sum += maxR*maxG*maxB
+        return sum
     
 
 # Sample
@@ -60,3 +71,8 @@ y = cubeConundrum("day2/input.txt")
 y.parse()
 y.partOne(12,13,14)
 print(sum(y.validGames))
+
+# Part 2
+z = cubeConundrum("day2/input.txt")
+z.parse()
+print(z.partTwo())
